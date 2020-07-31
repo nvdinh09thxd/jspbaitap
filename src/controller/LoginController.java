@@ -23,12 +23,11 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Users user = (Users) session.getAttribute("user");
-		if (user != null) {
-			ArrayList<Users> listItems = new ArrayList<>();
+		if (session.getAttribute("user") != null) {
+			ArrayList<Users> listUsers = new ArrayList<>();
 			UserDao userDao = new UserDao();
-			listItems = userDao.getItems();
-			request.setAttribute("listUsers", listItems);
+			listUsers = userDao.getItems();
+			request.setAttribute("listUsers", listUsers);
 			request.getRequestDispatcher("/templates/index.jsp").forward(request, response);
 			return;
 		}

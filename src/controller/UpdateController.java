@@ -83,13 +83,13 @@ public class UpdateController extends HttpServlet {
 			}
 			session.setAttribute("user", user);
 			request.setAttribute("msg", "Cập nhật thành công!");
-			ArrayList<Users> listItems = new ArrayList<>();
-			listItems = userDao.getItems();
-			request.setAttribute("listUsers", listItems);
+			ArrayList<Users> listUsers = new ArrayList<>();
+			listUsers = userDao.getItems();
+			request.setAttribute("listUsers", listUsers);
 			request.getRequestDispatcher("/templates/index.jsp").forward(request, response);
 			return;
 		} else {
-			request.setAttribute("err", "Cap nhat that bai!");
+			request.setAttribute("err", "Xảy ra lỗi trong quá trình xử lý!");
 			forward(request, response);
 			return;
 		}

@@ -16,13 +16,13 @@
 		<div class="w3agile-border">
 			<h2>Login Form | VinaEnter Edu</h2>
 			<div class="login-main login-agileits"> 
-			<p style='color: red'>${err}</p>
+			<p style="color: red; background-color: yellow; font-weight: bold; font-style: italic">${err}</p>
 				<h1>Login</h1> 
 				<form method="post">
 					<p>Email (*)</p>
 					<input type="text" placeholder="example@gmail.com" name="email" value="${email}" />
 					<p>Password (*)</p>
-					<input type="password" placeholder="Password" name="password" value="${password}" />
+					<input type="password" placeholder="Password" name="password" />
 					
 					<input type="submit" value="Login">
 				</form>
