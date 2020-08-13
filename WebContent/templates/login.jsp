@@ -3,11 +3,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Form User | VinaEnter Edu</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<link href="<%=request.getContextPath() %>/templates/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<title>Form User | VinaEnter Edu</title>  
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<link href="<%=request.getContextPath() %>/templates/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 
 </head>
 <body>
@@ -17,7 +17,7 @@
 			<h2>Login Form | VinaEnter Edu</h2>
 			<div class="login-main login-agileits"> 
 			<p style="color: red; background-color: yellow; font-weight: bold; font-style: italic">${err}</p>
-				<h1>Login</h1> 
+				<h1>Login</h1>
 				<form method="post">
 					<p>Email (*)</p>
 					<input type="text" placeholder="example@gmail.com" name="email" value="${email}" />

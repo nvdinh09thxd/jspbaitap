@@ -5,11 +5,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Form User | VinaEnter Edu</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<link href="<%=request.getContextPath() %>/templates/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<title>Form User | VinaEnter Edu</title>  
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<link href="<%=request.getContextPath() %>/templates/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
 	<!-- login starts here -->
@@ -25,8 +25,9 @@
 				} else {
 					response.sendRedirect(request.getContextPath()+ "/login");
 				}
-			%> 
-				<p style="color: green; background-color: yellow; font-weight: bold; font-style: italic">${msg}</p>
+				String msg = (String) request.getParameter("msg");
+				if("1".equals(msg)) out.print("<p style='color: green; background-color: yellow; font-weight: bold; font-style: italic'>Cập nhật thành công!</p>");
+			%>
 				<div class="userinfo">
 					<p class="fullname">Xin chào : <%out.print(name);%></p>
 					<p class="link"><a href="<%=request.getContextPath() %>/update" title="Cập nhật thông tin">Cập nhật thông tin</a></p>
@@ -42,6 +43,7 @@
 					</tr>
 					<%
 					if(request.getAttribute("listUsers")!=null){
+						@SuppressWarnings("unchecked")
 						ArrayList<Users> listUsers = (ArrayList<Users>) request.getAttribute("listUsers");
 						for(Users objUsers: listUsers){
 					%>

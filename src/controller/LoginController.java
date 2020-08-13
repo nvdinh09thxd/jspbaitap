@@ -1,16 +1,13 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.bean.Users;
 import model.dao.UserDao;
 
 public class LoginController extends HttpServlet {
@@ -24,15 +21,10 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") != null) {
-			ArrayList<Users> listUsers = new ArrayList<>();
-			UserDao userDao = new UserDao();
-			listUsers = userDao.getItems();
-			request.setAttribute("listUsers", listUsers);
-			request.getRequestDispatcher("/templates/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+ "/index");
 			return;
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/templates/login.jsp");
-		rd.forward(request, response);
+		request.getRequestDispatcher("/templates/login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,23 +39,16 @@ public class LoginController extends HttpServlet {
 
 		if ("".equals(email) || "".equals(password)) {
 			request.setAttribute("err", err1);
-			RequestDispatcher rd = request.getRequestDispatcher("/templates/login.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("/templates/login.jsp").forward(request, response);
 		} else {
-			ArrayList<Users> listItems = new ArrayList<>();
 			UserDao userDao = new UserDao();
-			listItems = userDao.getItems();
-			for (Users user : listItems) {
-				if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-					session.setAttribute("user", user);
-					request.setAttribute("listUsers", listItems);
-					request.getRequestDispatcher("/templates/index.jsp").forward(request, response);
-					return;
-				}
+			if (userDao.getItem(email, password) != null) {
+				session.setAttribute("user", userDao.getItem(email, password));
+				response.sendRedirect(request.getContextPath() + "/index");
+				return;
 			}
 			request.setAttribute("err", err2);
-			RequestDispatcher rd = request.getRequestDispatcher("/templates/login.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("/templates/login.jsp").forward(request, response);
 		}
 	}
 }

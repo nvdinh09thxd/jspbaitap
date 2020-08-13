@@ -2,9 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -24,14 +22,9 @@ public class UpdateController extends HttpServlet {
 		super();
 	}
 
-	public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/templates/capnhat.jsp");
-		rd.forward(request, response);
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		forward(request, response);
+		request.getRequestDispatcher("/templates/capnhat.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -82,15 +75,11 @@ public class UpdateController extends HttpServlet {
 				filePart.write(filePath);
 			}
 			session.setAttribute("user", user);
-			request.setAttribute("msg", "Cập nhật thành công!");
-			ArrayList<Users> listUsers = new ArrayList<>();
-			listUsers = userDao.getItems();
-			request.setAttribute("listUsers", listUsers);
-			request.getRequestDispatcher("/templates/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+ "/index?msg=1");
 			return;
 		} else {
 			request.setAttribute("err", "Xảy ra lỗi trong quá trình xử lý!");
-			forward(request, response);
+			request.getRequestDispatcher("/templates/capnhat.jsp").forward(request, response);
 			return;
 		}
 	}

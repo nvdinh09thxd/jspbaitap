@@ -60,9 +60,8 @@ public class UserDao {
 
 	public int editItem(Users user) {
 		int result = 0;
-		String sql;
 		conn = DBConnectionUtil.getConnection();
-		sql = "UPDATE users SET email = ?, fullname= ?, avatar = ? WHERE id = ?";
+		String sql = "UPDATE users SET email = ?, fullname = ?, avatar = ? WHERE id = ?";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, user.getEmail());
@@ -76,5 +75,26 @@ public class UserDao {
 			DBConnectionUtil.close(pst, conn);
 		}
 		return result;
+	}
+
+	public Users getItem(String username, String password) {
+		conn = DBConnectionUtil.getConnection();
+		String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+		Users item = null;
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, username);
+			pst.setString(2, password);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				item = new Users(rs.getInt("id"), rs.getString("email"), rs.getString("password"),
+						rs.getString("avatar"), rs.getString("fullname"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, conn);
+		}
+		return item;
 	}
 }

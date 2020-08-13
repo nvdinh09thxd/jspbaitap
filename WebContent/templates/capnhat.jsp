@@ -4,11 +4,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>CPANEL | VinaEnter Edu</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<link href="<%=request.getContextPath() %>/templates/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<title>CPANEL | VinaEnter Edu</title>  
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<link href="<%=request.getContextPath() %>/templates/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
 	<!-- login starts here -->
@@ -16,7 +16,7 @@
 		<div class="w3agile-border">
 			<h2>TRANG QUẢN TRỊ VIÊN | CẬP NHẬT THÔNG TIN NGƯỜI DÙNG</h2>
 			<div class="login-main login-agileits"> 
-			<p style='color: red'>${err}</p>
+			<p style='color: red; background-color: yellow; font-weight: bold; font-style: italic'>${err}</p>
 		<%
 			String username = "";
 			String fullname = "";
